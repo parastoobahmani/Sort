@@ -88,6 +88,7 @@ def merge_sort(elements):
             j+=1
             k+=1
     write_to_file(elements, "merge_sort")
+   
 
 #********************************************Function_related to comb_sort**********************************************
 def getNextGap(gap):
@@ -124,6 +125,19 @@ def comb_sort(elements):
                 elements[i], elements[i + gap] = elements[i + gap], elements[i]
                 swapped = True
     write_to_file(elements, "Comb_sort")
+    
+#**************************************************INSERTION_SORT*******************************************************
+    def insertionsort(elements):
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(elements)):
+        key = elements[i]
+        j = i - 1
+        while j >= 0 and key < elements[j]:
+            elements[j + 1] = elements[j]
+            j -= 1
+        elements[j + 1] = key
+    write_to_file(elements, "insertionsort")
+
 
 #______________________________________________iterateAndShellSort
 
@@ -178,6 +192,17 @@ def iterate_and_comb_sort():
         duration=final_time-init_time
         f.write("Algorithm <Comb_sort> took "+str(duration)+" seconds to finish\n")
 
+#********************************************ITERATE_AND_INSERTION_SORT*************************************************
+def iteateandinsertionsort():
+    global init_time
+    for elements in read_from_file("data.txt"):
+        insertionsort(elements)
+    with open("duratuion.txt", mode="a") as f:
+        finaltime = time.perf_counter()
+        duration = finaltime - init_time
+        f.write("algorithm insertion sort took " + str(duration) + "seconds to finish \n")
+
+
 #***************************************************MAIN_FUNCTION*******************************************************
 def main():
     global init_time           # age az multiprocessing estefade konim bayad init_time ro az halat global dar biarim
@@ -208,6 +233,9 @@ def main():
     
     t5 = Thread(target = iterateAndShellSort())
     t5.start()
+    
+    t6 = Thread(target = iteateandinsertionsort)
+    t6.start()
     
 if __name__ == '__main__':
     main()
