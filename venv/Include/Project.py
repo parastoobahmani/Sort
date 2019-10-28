@@ -195,7 +195,7 @@ def iterate_and_comb_sort():
 #********************************************ITERATE_AND_INSERTION_SORT*************************************************
 def iteateandinsertionsort():
     global init_time
-    for elements in read_from_file("data.txt"):
+    for elements in read_from_file("Random.txt"):
         insertionsort(elements)
     with open("duratuion.txt", mode="a") as f:
         finaltime = time.perf_counter()
